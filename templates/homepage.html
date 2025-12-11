@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | AI Recipe Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        
+        @keyframes bgZoomIn {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("{{ url_for('static', filename='images/recipe-generator-next.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transform: scale(1);
+            animation: bgZoomIn 5s ease-in-out forwards;
+            z-index: -1; 
+        }
+
+        /* Fade-in effect for the box */
+        .animate-fadeIn { animation: fadeIn 1.5s ease-in-out; }
+        
+        /* Welcome message animation */
+        .animate-slideIn { animation: slideIn 1.5s ease-out; }
+
+        /* Ensure body takes full height */
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden; /* Prevents scroll from zoom */
+            position: relative;
+        }
+
+        
+        .glass-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            max-width: 500px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .glass-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        
+        .chef-title {
+            font-size: 3.5rem;
+            font-family: 'Lucida Handwriting', cursive;
+            font-style: italic;
+            font-weight: bold;
+            color: white;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-green {
+            background: linear-gradient(45deg, #28a745, #218838);
+            color: white;
+        }
+
+        .btn-green:hover {
+            background: linear-gradient(45deg, #218838, #28a745);
+            transform: scale(1.05);
+        }
+
+        .btn-blue {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+        }
+
+        .btn-blue:hover {
+            background: linear-gradient(45deg, #0056b3, #007bff);
+            transform: scale(1.05);
+        }
+        .btn-red {
+    background: linear-gradient(45deg, #dc3545, #b22222);
+    color: white;
+}
+.btn-red:hover {
+    background: linear-gradient(45deg, #b22222, #dc3545);
+    transform: scale(1.05);
+}
+
+    </style>
+</head>
+<body>
+    
+    <h1 class="chef-title animate-slideIn">🍽️ Chef Mate</h1>
+
+    <div class="glass-box animate-fadeIn">
+        <h2 class="text-3xl font-bold italic text-white mb-4 animate-slideIn">Welcome</h2>
+
+        <p class="text-lg text-black font-medium font-semibold mb-6 animate-slideIn">
+            Discover and generate delicious recipes or extract cooking steps from YouTube videos.</p>
+        
+        <div class="space-y-4">
+            <a href="/recipe-generator" class="btn btn-green">📝 AI Recipe Generator</a>
+            <a href="/youtube_extractor" class="btn btn-red">🎥 YouTube Extractor</a>
+        </div>
+    </div>
+</body>
+</html>

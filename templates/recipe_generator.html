@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Recipe Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fadeIn { animation: fadeIn 1.5s ease-in-out; }
+        body {
+            background-image: url("{{ url_for('static', filename='images/recipe-generator.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center">
+    <div class="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg w-full max-w-lg animate-fadeIn">
+        <h1 class="text-3xl font-bold text-green-600 mb-4 text-center">🍽 AI Recipe Generator</h1>
+        <p class="text-gray-700 text-center mb-6">Enter ingredients and let AI create a delicious recipe for you!</p>
+        
+        <label class="block text-gray-600">Ingredients (comma separated):</label>
+        <input type="text" id="ingredients" class="w-full px-4 py-2 border rounded-lg mb-4" placeholder="e.g., chicken, rice, tomatoes">
+        
+        <label class="block text-gray-600">Cuisine Type:</label>
+        <select id="cuisine" class="w-full px-4 py-2 border rounded-lg mb-4">
+            <option value="any">Any</option>
+            <option value="Italian">Italian</option>
+            <option value="Indian">Indian</option>
+            <option value="Mexican">Mexican</option>
+        </select>
+        
+        <label class="block text-gray-600">Difficulty Level:</label>
+        <select id="difficulty" class="w-full px-4 py-2 border rounded-lg mb-4">
+            <option value="any">Any</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+        
+        <label class="block text-gray-600">Number of Servings:</label>
+        <input type="number" id="servings" min="1" value="4" class="w-full px-4 py-2 border rounded-lg mb-4">
+        
+        <label class="block text-gray-600">Cooking Time (minutes):</label>
+        <input type="number" id="time" min="1" value="30" class="w-full px-4 py-2 border rounded-lg mb-4">
+        
+        <button onclick="generateRecipe()" class="w-full bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600 transition">🍳 Generate Recipe</button>
+        
+        <div id="loading" class="hidden text-center text-gray-600 font-bold mt-4">⏳ Generating your recipe...</div>
+    </div>
+
+    
+    <div id="recipe-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="modal bg-white p-8 rounded-lg shadow-2xl w-full max-w-4xl h-auto">
+            <h2 class="text-2xl font-semibold text-green-600">🍛 AI-Generated Recipe</h2>
+            <div id="recipe-text" class="text-gray-700 mt-4 border border-gray-300 rounded-lg p-4 h-80 overflow-y-auto"></div>
+            <button onclick="closeModal()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">Close</button>
+        </div>
+    </div>
+    
+    
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
